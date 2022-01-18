@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/CIRCUITOS2021carteleria_1.js"></script>
+        <script src="data/CARTELERIAPYPFINAL01112021SHAPE_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:20, minZoom:10
+        }).fitBounds([[-32.978507663125285,-68.93624579879783],[-32.87870555200441,-68.69618165914443]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            map.setMaxBounds(map.getBounds());
+        }
+        map.createPane('pane_OpenStreetMap_0');
+        map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
+        var layer_OpenStreetMap_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OpenStreetMap_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 10,
+            maxZoom: 20,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_CIRCUITOS2021carteleria_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Circuito'] !== null ? autolinker.link(feature.properties['Circuito'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CIRCUITOS2021carteleria_1_0() {
+            return {
+                pane: 'pane_CIRCUITOS2021carteleria_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.5803921568627451)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,208,208,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CIRCUITOS2021carteleria_1');
+        map.getPane('pane_CIRCUITOS2021carteleria_1').style.zIndex = 401;
+        map.getPane('pane_CIRCUITOS2021carteleria_1').style['mix-blend-mode'] = 'normal';
+        var layer_CIRCUITOS2021carteleria_1 = new L.geoJson(json_CIRCUITOS2021carteleria_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CIRCUITOS2021carteleria_1',
+            layerName: 'layer_CIRCUITOS2021carteleria_1',
+            pane: 'pane_CIRCUITOS2021carteleria_1',
+            onEachFeature: pop_CIRCUITOS2021carteleria_1,
+            style: style_CIRCUITOS2021carteleria_1_0,
+        });
+        bounds_group.addLayer(layer_CIRCUITOS2021carteleria_1);
+        map.addLayer(layer_CIRCUITOS2021carteleria_1);
+        function pop_CARTELERIAPYPFINAL01112021SHAPE_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID SYCSA</th>\
+                        <td>' + (feature.properties['ID SYCSA'] !== null ? autolinker.link(feature.properties['ID SYCSA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID MUNICIP</th>\
+                        <td>' + (feature.properties['ID MUNICIP'] !== null ? autolinker.link(feature.properties['ID MUNICIP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CIRCUITO R</th>\
+                        <td>' + (feature.properties['CIRCUITO R'] !== null ? autolinker.link(feature.properties['CIRCUITO R'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CIRCUITO D</th>\
+                        <td>' + (feature.properties['CIRCUITO D'] !== null ? autolinker.link(feature.properties['CIRCUITO D'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PADRON</th>\
+                        <td>' + (feature.properties['PADRON'] !== null ? autolinker.link(feature.properties['PADRON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CUENTA</th>\
+                        <td>' + (feature.properties['CUENTA'] !== null ? autolinker.link(feature.properties['CUENTA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">EMPRESA</th>\
+                        <td>' + (feature.properties['EMPRESA'] !== null ? autolinker.link(feature.properties['EMPRESA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TIPO</th>\
+                        <td>' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CALLE 1</th>\
+                        <td>' + (feature.properties['CALLE 1'] !== null ? autolinker.link(feature.properties['CALLE 1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NRO</th>\
+                        <td>' + (feature.properties['NRO'] !== null ? autolinker.link(feature.properties['NRO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DOMICILIO</th>\
+                        <td>' + (feature.properties['DOMICILIO'] !== null ? autolinker.link(feature.properties['DOMICILIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DOMICILI_1</th>\
+                        <td>' + (feature.properties['DOMICILI_1'] !== null ? autolinker.link(feature.properties['DOMICILI_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CALLE 2 (R</th>\
+                        <td>' + (feature.properties['CALLE 2 (R'] !== null ? autolinker.link(feature.properties['CALLE 2 (R'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">OBSERVACIO</th>\
+                        <td>' + (feature.properties['OBSERVACIO'] !== null ? autolinker.link(feature.properties['OBSERVACIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CANT</th>\
+                        <td>' + (feature.properties['CANT'] !== null ? autolinker.link(feature.properties['CANT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MEDIDA ANC</th>\
+                        <td>' + (feature.properties['MEDIDA ANC'] !== null ? autolinker.link(feature.properties['MEDIDA ANC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MEDIDA ALT</th>\
+                        <td>' + (feature.properties['MEDIDA ALT'] !== null ? autolinker.link(feature.properties['MEDIDA ALT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CARAS</th>\
+                        <td>' + (feature.properties['CARAS'] !== null ? autolinker.link(feature.properties['CARAS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">METROS</th>\
+                        <td>' + (feature.properties['METROS'] !== null ? autolinker.link(feature.properties['METROS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CARTELERIAPYPFINAL01112021SHAPE_2_0(feature) {
+            switch(String(feature.properties['TIPO'])) {
+                case 'CARTEL':
+                    return {
+                pane: 'pane_CARTELERIAPYPFINAL01112021SHAPE_2',
+                shape: 'square',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(126,224,237,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'CPM':
+                    return {
+                pane: 'pane_CARTELERIAPYPFINAL01112021SHAPE_2',
+                shape: 'square',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,153,83,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'GF':
+                    return {
+                pane: 'pane_CARTELERIAPYPFINAL01112021SHAPE_2',
+                shape: 'diamond',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(108,225,161,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'LED':
+                    return {
+                pane: 'pane_CARTELERIAPYPFINAL01112021SHAPE_2',
+                shape: 'diamond',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(206,216,127,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MC':
+                    return {
+                pane: 'pane_CARTELERIAPYPFINAL01112021SHAPE_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,56,197,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MONO':
+                    return {
+                pane: 'pane_CARTELERIAPYPFINAL01112021SHAPE_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,123,140,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PPL':
+                    return {
+                pane: 'pane_CARTELERIAPYPFINAL01112021SHAPE_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,128,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'VALLA':
+                    return {
+                pane: 'pane_CARTELERIAPYPFINAL01112021SHAPE_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(107,20,214,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_CARTELERIAPYPFINAL01112021SHAPE_2');
+        map.getPane('pane_CARTELERIAPYPFINAL01112021SHAPE_2').style.zIndex = 402;
+        map.getPane('pane_CARTELERIAPYPFINAL01112021SHAPE_2').style['mix-blend-mode'] = 'normal';
+        var layer_CARTELERIAPYPFINAL01112021SHAPE_2 = new L.geoJson(json_CARTELERIAPYPFINAL01112021SHAPE_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CARTELERIAPYPFINAL01112021SHAPE_2',
+            layerName: 'layer_CARTELERIAPYPFINAL01112021SHAPE_2',
+            pane: 'pane_CARTELERIAPYPFINAL01112021SHAPE_2',
+            onEachFeature: pop_CARTELERIAPYPFINAL01112021SHAPE_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_CARTELERIAPYPFINAL01112021SHAPE_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_CARTELERIAPYPFINAL01112021SHAPE_2);
+        map.addLayer(layer_CARTELERIAPYPFINAL01112021SHAPE_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'CARTELERIA PYP FINAL 01112021 SHAPE<br /><table><tr><td style="text-align: center;"><img src="legend/CARTELERIAPYPFINAL01112021SHAPE_2_CARTEL0.png" /></td><td>CARTEL</td></tr><tr><td style="text-align: center;"><img src="legend/CARTELERIAPYPFINAL01112021SHAPE_2_CPM1.png" /></td><td>CPM</td></tr><tr><td style="text-align: center;"><img src="legend/CARTELERIAPYPFINAL01112021SHAPE_2_GF2.png" /></td><td>GF</td></tr><tr><td style="text-align: center;"><img src="legend/CARTELERIAPYPFINAL01112021SHAPE_2_LED3.png" /></td><td>LED</td></tr><tr><td style="text-align: center;"><img src="legend/CARTELERIAPYPFINAL01112021SHAPE_2_MC4.png" /></td><td>MC</td></tr><tr><td style="text-align: center;"><img src="legend/CARTELERIAPYPFINAL01112021SHAPE_2_MONO5.png" /></td><td>MONO</td></tr><tr><td style="text-align: center;"><img src="legend/CARTELERIAPYPFINAL01112021SHAPE_2_PPL6.png" /></td><td>PPL</td></tr><tr><td style="text-align: center;"><img src="legend/CARTELERIAPYPFINAL01112021SHAPE_2_VALLA7.png" /></td><td>VALLA</td></tr></table>': layer_CARTELERIAPYPFINAL01112021SHAPE_2,'<img src="legend/CIRCUITOS2021carteleria_1.png" /> CIRCUITOS 2021 carteleria': layer_CIRCUITOS2021carteleria_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"TIPO": "str","EMPRESA": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_TIPO = document.createElement('div');
+            div_TIPO.id = "div_TIPO";
+            div_TIPO.className= "filterselect";
+            document.getElementById("menu").appendChild(div_TIPO);
+            sel_TIPO = document.createElement('select');
+            sel_TIPO.multiple = true;
+            sel_TIPO.size = 8;
+            sel_TIPO.id = "sel_TIPO";
+            var TIPO_options_str = "<option value='' unselected></option>";
+            sel_TIPO.onchange = function(){filterFunc()};
+            TIPO_options_str  += '<option value="CARTEL">CARTEL</option>';
+            TIPO_options_str  += '<option value="CPM">CPM</option>';
+            TIPO_options_str  += '<option value="GF">GF</option>';
+            TIPO_options_str  += '<option value="LED">LED</option>';
+            TIPO_options_str  += '<option value="MC">MC</option>';
+            TIPO_options_str  += '<option value="MONO">MONO</option>';
+            TIPO_options_str  += '<option value="PPL">PPL</option>';
+            TIPO_options_str  += '<option value="VALLA">VALLA</option>';
+            sel_TIPO.innerHTML = TIPO_options_str;
+            div_TIPO.appendChild(sel_TIPO);
+            var lab_TIPO = document.createElement('div');
+            lab_TIPO.innerHTML = 'TIPO';
+            lab_TIPO.className = 'filterlabel';
+            div_TIPO.appendChild(lab_TIPO);
+            var reset_TIPO = document.createElement('div');
+            reset_TIPO.innerHTML = 'clear filter';
+            reset_TIPO.className = 'filterlabel';
+            reset_TIPO.onclick = function() {
+                var options = document.getElementById("sel_TIPO").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_TIPO.appendChild(reset_TIPO);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_EMPRESA = document.createElement('div');
+            div_EMPRESA.id = "div_EMPRESA";
+            div_EMPRESA.className= "filterselect";
+            document.getElementById("menu").appendChild(div_EMPRESA);
+            sel_EMPRESA = document.createElement('select');
+            sel_EMPRESA.multiple = true;
+            sel_EMPRESA.size = 10;
+            sel_EMPRESA.id = "sel_EMPRESA";
+            var EMPRESA_options_str = "<option value='' unselected></option>";
+            sel_EMPRESA.onchange = function(){filterFunc()};
+            EMPRESA_options_str  += '<option value="AMANECER">AMANECER</option>';
+            EMPRESA_options_str  += '<option value="BIGMEDIA">BIGMEDIA</option>';
+            EMPRESA_options_str  += '<option value="BRAIDOT Y CIA">BRAIDOT Y CIA</option>';
+            EMPRESA_options_str  += '<option value="BULNES">BULNES</option>';
+            EMPRESA_options_str  += '<option value="CARTELERIA DEL OESTE">CARTELERIA DEL OESTE</option>';
+            EMPRESA_options_str  += '<option value="CARTELES CALLEJEROS">CARTELES CALLEJEROS</option>';
+            EMPRESA_options_str  += '<option value="CASTRO">CASTRO</option>';
+            EMPRESA_options_str  += '<option value="CFN">CFN</option>';
+            EMPRESA_options_str  += '<option value="CHAIN">CHAIN</option>';
+            EMPRESA_options_str  += '<option value="CHAIN- GEO XXI">CHAIN- GEO XXI</option>';
+            EMPRESA_options_str  += '<option value="DICTA">DICTA</option>';
+            EMPRESA_options_str  += '<option value="EXPONER">EXPONER</option>';
+            EMPRESA_options_str  += '<option value="FRANCHETTI">FRANCHETTI</option>';
+            EMPRESA_options_str  += '<option value="FRANCISCO LORES">FRANCISCO LORES</option>';
+            EMPRESA_options_str  += '<option value="FUNDACION LUZ DEL MUNDO">FUNDACION LUZ DEL MUNDO</option>';
+            EMPRESA_options_str  += '<option value="INTERVIP">INTERVIP</option>';
+            EMPRESA_options_str  += '<option value="INTRAMEDIA">INTRAMEDIA</option>';
+            EMPRESA_options_str  += '<option value="LA COOPE">LA COOPE</option>';
+            EMPRESA_options_str  += '<option value="LABORATORIOS ENCO">LABORATORIOS ENCO</option>';
+            EMPRESA_options_str  += '<option value="LALUCOM">LALUCOM</option>';
+            EMPRESA_options_str  += '<option value="LAMBERTUCCI ARIEL">LAMBERTUCCI ARIEL</option>';
+            EMPRESA_options_str  += '<option value="LAMBERTUCCI LUCAS">LAMBERTUCCI LUCAS</option>';
+            EMPRESA_options_str  += '<option value="LAUKUQ">LAUKUQ</option>';
+            EMPRESA_options_str  += '<option value="MULTIMARKETING">MULTIMARKETING</option>';
+            EMPRESA_options_str  += '<option value="NEGOCIOS ANDINOS">NEGOCIOS ANDINOS</option>';
+            EMPRESA_options_str  += '<option value="NEXO">NEXO</option>';
+            EMPRESA_options_str  += '<option value="OTI">OTI</option>';
+            EMPRESA_options_str  += '<option value="PAUTA PUBLICITARIA-RETA">PAUTA PUBLICITARIA-RETA</option>';
+            EMPRESA_options_str  += '<option value="PERSEO">PERSEO</option>';
+            EMPRESA_options_str  += '<option value="PUBLICIDAD SARMIENTO">PUBLICIDAD SARMIENTO</option>';
+            EMPRESA_options_str  += '<option value="SANMICHELI">SANMICHELI</option>';
+            EMPRESA_options_str  += '<option value="TRESMEDIOS">TRESMEDIOS</option>';
+            EMPRESA_options_str  += '<option value="VP INVERSORA">VP INVERSORA</option>';
+            sel_EMPRESA.innerHTML = EMPRESA_options_str;
+            div_EMPRESA.appendChild(sel_EMPRESA);
+            var lab_EMPRESA = document.createElement('div');
+            lab_EMPRESA.innerHTML = 'EMPRESA';
+            lab_EMPRESA.className = 'filterlabel';
+            div_EMPRESA.appendChild(lab_EMPRESA);
+            var reset_EMPRESA = document.createElement('div');
+            reset_EMPRESA.innerHTML = 'clear filter';
+            reset_EMPRESA.className = 'filterlabel';
+            reset_EMPRESA.onclick = function() {
+                var options = document.getElementById("sel_EMPRESA").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_EMPRESA.appendChild(reset_EMPRESA);
+        </script>
+    </body>
+</html>
